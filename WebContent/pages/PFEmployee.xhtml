@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+    <h:head>
+    	<title>PrimeFaces Employee Administration Application</title>
+    </h:head>
+<h:body>
+	<h:outputLink value="#" id="foo" onclick="alert('hi')">
+	        FOO it
+	</h:outputLink>
+<br/>    
+<h:outputText value="PrimeFaces: client ID : #{p:component('foo')}" />
+<br/>
+<h:form id="empform" prependId="false">
+	<h:panelGroup id="main">
+		<p:commandButton id="cmdButton" actionListener="#{emp.testActionListener}" value="Click Me" update="empform:innerContent :outerContent empform:content"/>
+	</h:panelGroup>
+
+	<h:panelGroup layout="block" id="content" class="ui-widget">
+		Emp name in content is #{emp.getName('sundar')}
+			<h:panelGroup id="innerContent" layout="block">
+				counter is #{emp.increment()}
+			</h:panelGroup>
+	</h:panelGroup>
+	<p:remoteCommand name="test" process="@this" update="@none" actionListener="#{emp.testRemoteCmd}" />
+	
+</h:form>
+<br/>
+
+<h:panelGroup layout="block" id="content1" class="ui-widget">
+	Second name is #{emp.getName('jana')}
+	<h:panelGroup id="outerContent" layout="block">
+				counter is #{emp.decrement()}
+	</h:panelGroup>
+</h:panelGroup>
+
+
+</h:body>
+<h:outputScript>
+	test()
+</h:outputScript>
+</html>
